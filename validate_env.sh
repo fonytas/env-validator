@@ -24,3 +24,5 @@ retrieve_env() {
 }
 
 retrieve_env
+
+cat .env.registry
