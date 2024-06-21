@@ -36,7 +36,8 @@ retrieve_env() {
 }
 
 validate_env() {
-    echo "🚂💨 Start validating..."
+    {
+      echo "🚂💨 Start validating..."
     echo "---------------------------------"
 
     # Check if all the env from ./app/envs/.env.development file are present in .env.registry
@@ -57,6 +58,11 @@ validate_env() {
     fi
 
     echo "✅ Passed validation"
+
+    } || {
+        echo "🛑 An error occurred while validating environment variables. 🛑"
+        exit 1
+    }
 }
 
 retrieve_env
