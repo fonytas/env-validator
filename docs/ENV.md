@@ -8,6 +8,7 @@ These are for testing purpose
 | NEXT_PUBLIC_CHAIN_URL_EXPLORER   | `string` | Chain Explorer Url | `https://www.bkcscan.com` |
 | NEXT_PUBLIC_CHAIN_URL_EXPLORER_2 | `string` | Chain Explorer Url | `https://www.bkcscan.com` |
 
+w
 More
 
 | Variable      | Type     | Description        | Example value | optional |
