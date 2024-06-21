@@ -46,10 +46,11 @@ validate_env() {
       while IFS= read -r line
       do
         if ! grep -q "^$(echo "$line" | cut -d '=' -f 1)" .env.registry; then
-          missing_envs+=1
+          missing_envs=$((missing_envs + 1))
+          echo "$missing_envs"
           echo " Missing env in /docs/ENV.md: $(echo "$line" | cut -d '=' -f 1)"
         fi
-      done < "/app/envs/.env.development"
+      done < "./app/envs/.env.development"
 
       #  check if missing env is more than or equal to 1
       if [ $missing_envs -ge 1 ]; then
