@@ -48,7 +48,7 @@ validate_env() {
       echo " Missing env in /docs/ENV.md: $(echo "$line" | cut -d '=' -f 1)"
       missing_envs+="$(echo "$line" | cut -d '=' -f 1)\n"
       fi
-    done < "./app/envs/.env.development"
+    done < "/app/envs/.env.development"
 
     if [ -n "$missing_envs" ]; then
       echo "---------------------------------"
