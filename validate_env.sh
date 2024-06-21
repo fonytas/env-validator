@@ -38,28 +38,27 @@ retrieve_env() {
 validate_env() {
     {
       echo "🚂💨 Start validating..."
-    echo "---------------------------------"
-
-    # Check if all the env from ./app/envs/.env.development file are present in .env.registry
-    # each env from the .env.registry file should split by = and get the first element
-    missing_envs=0
-    while IFS= read -r line
-    do
-      if ! grep -q "^$(echo "$line" | cut -d '=' -f 1)" .env.registry; then
-      echo " Missing env in /docs/ENV.md: $(echo "$line" | cut -d '=' -f 1)"
-      missing_envs+=1
-      fi
-    done < "/app/envs/.env.development"
-
-    #  check if missing env is more than or equal to 1
-    if [ $missing_envs -ge 1 ]; then
       echo "---------------------------------"
-      echo "🛑 Please put all these ENV to /docs/ENV.md🛑"
-      exit 1
-    fi
 
-    echo "✅ Passed validation"
+      # Check if all the env from ./app/envs/.env.development file are present in .env.registry
+      # each env from the .env.registry file should split by = and get the first element
+      missing_envs=0
+      while IFS= read -r line
+      do
+        if ! grep -q "^$(echo "$line" | cut -d '=' -f 1)" .env.registry; then
+          missing_envs+=1
+          echo " Missing env in /docs/ENV.md: $(echo "$line" | cut -d '=' -f 1)"
+        fi
+      done < "/app/envs/.env.development"
 
+      #  check if missing env is more than or equal to 1
+      if [ $missing_envs -ge 1 ]; then
+        echo "---------------------------------"
+        echo "🛑 Please put all these ENV to /docs/ENV.md🛑"
+        exit 1
+      fi
+
+      echo "✅ Passed validation"
     } || {
         echo "🛑 An error occurred while validating environment variables. 🛑"
         exit 1
