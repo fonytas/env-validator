@@ -40,6 +40,12 @@ validate_env() {
       echo "🚂💨 Start validating..."
       echo "---------------------------------"
 
+      # Test if file /app/envs/.env.development exists
+      if [ ! -f /app/envs/.env.development ]; then
+          echo "🛑 File /app/envs/.env.development not found 🛑"
+          exit 1
+      fi
+
       # Check if all the env from ./app/envs/.env.development file are present in .env.registry
       # each env from the .env.registry file should split by = and get the first element
       missing_envs=0
