@@ -40,13 +40,13 @@ validate_env() {
       echo "🚂💨 Start validating..."
       echo "---------------------------------"
 
-      # Test if file /app/envs/.env.development exists
-      if [ ! -f /app/envs/.env.development ]; then
-          echo "🛑 File /app/envs/.env.development not found 🛑"
+      # Test if file /app/envs/.env.production exists
+      if [ ! -f /app/envs/.env.production ]; then
+          echo "🛑 File /app/envs/.env.production not found 🛑"
           exit 1
       fi
 
-      # Check if all the env from ./app/envs/.env.development file are present in .env.registry
+      # Check if all the env from ./app/envs/.env.production file are present in .env.registry
       # each env from the .env.registry file should split by = and get the first element
       missing_envs=0
       while IFS= read -r line || [ -n "$line" ];
@@ -55,7 +55,7 @@ validate_env() {
           missing_envs=$((missing_envs + 1))
           echo "$missing_envs. Missing env in /docs/ENV.md: $(echo "$line" | cut -d '=' -f 1)"
         fi
-      done < "/app/envs/.env.development"
+      done < "/app/envs/.env.production"
 
       #  check if missing env is more than or equal to 1
       if [ $missing_envs -ge 1 ]; then
