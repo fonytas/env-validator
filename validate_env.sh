@@ -46,7 +46,7 @@ validate_env() {
           exit 1
       fi
 
-      # Check if all the env from ./app/envs/.env.production file are present in .env.registry
+      # Check if all the env from /app/envs/.env.production file are present in .env.registry
       # each env from the .env.registry file should split by = and get the first element
       missing_envs=0
       while IFS= read -r line || [ -n "$line" ];
